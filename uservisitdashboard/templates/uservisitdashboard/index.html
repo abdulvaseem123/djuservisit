@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Customer Visit Details</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Customer Visit Table</h2>
+  <p>Type Customer</p>  
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Customer Name</th>
+        <th>Address</th>
+        <th>Assigned CSE</th>
+        <th>Branch</th>
+        <th>Date</th>
+        <th>Doc Attached</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+        {%for user in all_users  %}
+      <tr>
+          <td>{{user.customer_name}}</td>
+          <td>{{user.customer_address}}</td>
+        <td>{{user.assigned_CSE}}</td>
+        <td>{{user.branch}}</td>
+        <td>{{user.visit_date}}</td>
+        <td>{{user.doc_attached}}<input type="file" id="test" name="test" accept=".pdf,.doc"/></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+</html>
